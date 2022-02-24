@@ -64,6 +64,6 @@ function handleConnection(socket) {
     console.log(`Request body:\n${reqBody}`);
 
     // Send a generic response
-    socket.end(`HTTP/1.1 200 O**K\r\nServer: my-ecpi-shit-server\r\nContent-Length: ${reqHeader.length}\r\n\r\n${reqHeader}\r\n\r\n`);
+    socket.end(`HTTP/1.1 200 OK\r\nServer: my-ecpi-shit-server\r\nContent-Length:${reqHeader.length+('timestamp:'+Date.now()).length + 5}\r\ntimestamp:${Date.now()}\r\n\r\n${reqHeader}\r\n${'timestamp:'+Date.now()}\r\n\r\n`);
   });
 }
