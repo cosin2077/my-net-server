@@ -122,8 +122,13 @@ function createWebServer(requestHandler) {
 function listen() {
   const webServer = createWebServer((req, res) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
-    res.setHeader('Content-Type','text/html');
-    res.end(`<pre>${JSON.stringify(req.headers, null, 2)}</pre>`);
+    if (req.url == '/info') {
+      res.setHeader('Content-Type','text/html');
+      const data = JSON.stringify(req.headers, null, 2)
+      return  res.end(`<pre>${data}</pre>`);
+    }
+    res.setHeader('Content-Type','text/plain');
+    res.end('Hello')
   })
   const server = webServer.listen(PORT)
 
